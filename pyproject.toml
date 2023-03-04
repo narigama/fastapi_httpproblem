@@ -1,0 +1,50 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "fastapi-httpproblem"
+version = "0.1.0"
+description = "An implmentation of RFC7807 for FastAPI apps."
+authors = ["David Smith <david@narigama.dev>"]
+readme = "README.md"
+packages = [{include = "fastapi_httpproblem"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-asyncio = "*"
+pytest-random-order = "*"
+
+async_asgi_testclient = "*"
+uvicorn = "*"
+
+ruff = "*"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+addopts = "--random-order"
+
+[tool.black]
+line-length = 120
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 120
+src = ["fastapi_httpproblem"]
+exclude = ["tests", ".venv", "tmp*"]
+select = ["E", "F", "W", "C90", "I", "UP", "S", "B", "A", "COM", "T20", "Q", "SIM", "PTH"]
+ignore = [
+    "UP032",    # use f-string over .format
+]
+
+[tool.ruff.isort]
+known-first-party = ["fastapi_httpproblem"]
+force-single-line = true
+lines-after-imports = 2
+
+[tool.ruff.mccabe]
+max-complexity = 10
